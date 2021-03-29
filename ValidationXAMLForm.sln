@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationXAMLForm", "ValidationXAMLForm.csproj", "{F8BB62DE-DFC5-4BF8-8892-9E5DD9EBA98D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8BB62DE-DFC5-4BF8-8892-9E5DD9EBA98D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8BB62DE-DFC5-4BF8-8892-9E5DD9EBA98D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8BB62DE-DFC5-4BF8-8892-9E5DD9EBA98D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8BB62DE-DFC5-4BF8-8892-9E5DD9EBA98D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B067B394-590E-4E35-9950-F4D5C3FF7C55}
+	EndGlobalSection
+EndGlobal
