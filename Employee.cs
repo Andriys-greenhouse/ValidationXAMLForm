@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ValidationXAMLForm
 {
-    class Employee:Person
+    public class Employee:Person
     {
         public static List<Employee> Existing = new List<Employee>();
 
@@ -45,6 +45,14 @@ namespace ValidationXAMLForm
             Job = aJob;
             Wage = aWage;
             Education = aEducation;
+            Existing.Add(this);
+        }
+
+        public Employee() : base()
+        {
+            _Job = "";
+            _Wage = "";
+            _Education = "";
             Existing.Add(this);
         }
     }

@@ -2,7 +2,7 @@
 
 namespace ValidationXAMLForm
 {
-    class Person
+    public class Person
     {
         string _Name;
         public string Name
@@ -40,6 +40,13 @@ namespace ValidationXAMLForm
             Name = aName;
             LastName = aLastName;
             BirthYear = aBirthDate;
+        }
+
+        public Person()
+        {
+            _Name = "";
+            _LastName = "";
+            _BirthYear = "";
         }
     }
 }
