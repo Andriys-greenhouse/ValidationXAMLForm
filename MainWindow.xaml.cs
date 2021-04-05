@@ -21,7 +21,19 @@ namespace ValidationXAMLForm
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public static int curentIndex = 0;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        static int _CurentIndex;
+        public int CurentIndex
+        {
+            get { return _CurentIndex; }
+            set
+            {
+                _CurentIndex = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentIndex"));
+            }
+        }
+
         public static List<Employee> employeeList = new List<Employee>();
         public MainWindow()
         {
@@ -31,25 +43,20 @@ namespace ValidationXAMLForm
             employeeList.Add(new Employee("Martin", "Pálava", "1958", "Maturitní zkouška", "Výkonný ředitel", "75000"));
             employeeList.Add(new Employee());
 
-            this.DataContext = this;
-            NameBox.DataContext = employeeList[curentIndex];
-            LastNameBox.DataContext = employeeList[curentIndex];
-            BirthYearBox.DataContext = employeeList[curentIndex];
-            JobBox.DataContext = employeeList[curentIndex];
-            WageBox.DataContext = employeeList[curentIndex];
-            
-            PropertyChanged(this, new PropertyChangedEventArgs("curentIndex"));
+ 
+            NameBox.DataContext = employeeList[CurentIndex];
+            LastNameBox.DataContext = employeeList[CurentIndex];
+            BirthYearBox.DataContext = employeeList[CurentIndex];
+            JobBox.DataContext = employeeList[CurentIndex];
+            WageBox.DataContext = employeeList[CurentIndex];
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-        public static string HeadlineText
+        public string HeadlineText
         {
             get
             {
-                if (curentIndex == employeeList.Count - 1) { return "Nový zaměstnanec"; }
-                else { return $"Zaměstnanec {curentIndex + 1}"; }
+                if (_CurentIndex == employeeList.Count - 1) { return "Nový zaměstnanec"; }
+                else { return $"Zaměstnanec {_CurentIndex + 1}"; }
             }
         }
 
@@ -61,34 +68,32 @@ namespace ValidationXAMLForm
             if (true) { return true; } 
         }
 
-        public Visibility LeftButtonVisibility
+        public static Visibility LeftButtonVisibility
         {
             get
             {
-                if (curentIndex == 0 || curentIndex == employeeList.Count - 1) { return Visibility.Hidden; }
+                if (_CurentIndex == 0 || _CurentIndex == employeeList.Count - 1) { return Visibility.Hidden; }
                 else { return Visibility.Visible; }
             }
         }
 
-        public Visibility RightButtonVisibility
+        public static Visibility RightButtonVisibility
         {
             get
             {
-                if (curentIndex < employeeList.Count - 2) { return Visibility.Visible; }
+                if (_CurentIndex < employeeList.Count - 2) { return Visibility.Visible; }
                 else { return Visibility.Hidden; }
             }
         }
 
         private void LeftButton_Click(object sender, RoutedEventArgs e)
         {
-            curentIndex--;
-            PropertyChanged(this, new PropertyChangedEventArgs("curentIndex"));
+            CurentIndex--;
         }
 
         private void RightButton_Click(object sender, RoutedEventArgs e)
         {
-            curentIndex--;
-            PropertyChanged(this, new PropertyChangedEventArgs("curentIndex"));
+            CurentIndex++;
         }
     }
 }
