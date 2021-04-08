@@ -103,13 +103,36 @@ namespace ValidationXAMLForm
             set { employeeList[CurentIndex].EducationIndex = value; }
         }
 
-        public int nameErrHeight = 2;
-        public string nameErrText = "";
-        public Visibility nameErrVis = Visibility.Hidden;
+
+        public int nameErrHeight { get; set; }
+        public string nameErrText { get; set; }
+        public Visibility nameErrVis { get; set; }
         public static bool NameCheck()
         {
-            if (true) { return true; } 
+            if (NameBox.Text.Length < 1) 
+            { 
+                nameErrHeight = 10;
+                nameErrText = "Name must be at least two characters long."
+                nameErrVis = Visibility.Visible;
+                return false;
+            }
+            
+            else if (NameBox.Text.Length > 20)
+            {
+                nameErrHeight = 10;
+                nameErrText = "Name must be at most twenty characters long."
+                nameErrVis = Visibility.Visible;
+                return false;
+            }
+
+            else
+            {
+                nameErrHeight = 2;
+                nameErrVis = Visibility.Hidden;
+                return true;
+            }
         }
+
 
         public Visibility LeftButtonVisibility
         {
