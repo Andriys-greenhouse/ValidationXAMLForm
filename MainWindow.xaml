@@ -42,7 +42,9 @@
         <TextBlock Grid.Column="2" Grid.Row="2" Text="Jméno" HorizontalAlignment="Right" 
                    VerticalAlignment="Center"/>
         <TextBlock x:Name="NameErrBlock" Grid.Column="4" Grid.Row="3" VerticalAlignment="Center" 
-                   Height="2" Foreground="Red"/>
+                   Height="{Binding nameErrHeight,UpdateSourceTrigger=PropertyChanged}" 
+                   Text="{Binding nameErrText,UpdateSourceTrigger=PropertyChanged}" 
+                   Visibility="{Binding nameErrVis, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" />
         <TextBlock Grid.Column="2" Grid.Row="4" Text="Přijmení" HorizontalAlignment="Right" 
                    VerticalAlignment="Center"/>
         <TextBlock x:Name="LastNameErrBlock" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" 
@@ -63,7 +65,8 @@
                    Height="2" Foreground="Red"/>
 
         <TextBox x:Name="NameBox" Text="{Binding CurentName,UpdateSourceTrigger=PropertyChanged}" 
-                 Grid.Column="3" Grid.Row="2" Width="200" Margin="5" Grid.ColumnSpan="2"/>
+                 Grid.Column="3" Grid.Row="2" Width="200" Margin="5" Grid.ColumnSpan="2"
+                 TextChanged="NameBox_TextChanged"/>
         <TextBox x:Name="LastNameBox" Text="{Binding CurentLastName,UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="3" Grid.Row="4" Width="200" Margin="5" Grid.ColumnSpan="2"/>
         <TextBox x:Name="BirthYearBox" Text="{Binding CurentBirthYear,UpdateSourceTrigger=PropertyChanged}" 

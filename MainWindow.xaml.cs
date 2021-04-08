@@ -39,6 +39,7 @@ namespace ValidationXAMLForm
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentEducationIndex"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RightButtonVisibility"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LeftButtonVisibility"));
+                NameCheck();
             }
         }
 
@@ -52,13 +53,6 @@ namespace ValidationXAMLForm
             employeeList.Add(new Employee());
 
             DataContext = this;
-            /*
-            NameBox.DataContext = employeeList[CurentIndex];
-            LastNameBox.DataContext = employeeList[CurentIndex];
-            BirthYearBox.DataContext = employeeList[CurentIndex];
-            JobBox.DataContext = employeeList[CurentIndex];
-            WageBox.DataContext = employeeList[CurentIndex];
-            */
 
             CurentIndex = 0;
         }
@@ -114,6 +108,9 @@ namespace ValidationXAMLForm
                 nameErrHeight = 10;
                 nameErrText = "Name must be at least two characters long."
                 nameErrVis = Visibility.Visible;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrVis"));
                 return false;
             }
             
@@ -122,6 +119,9 @@ namespace ValidationXAMLForm
                 nameErrHeight = 10;
                 nameErrText = "Name must be at most twenty characters long."
                 nameErrVis = Visibility.Visible;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrVis"));
                 return false;
             }
 
@@ -129,6 +129,8 @@ namespace ValidationXAMLForm
             {
                 nameErrHeight = 2;
                 nameErrVis = Visibility.Hidden;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrVis"));
                 return true;
             }
         }
@@ -160,6 +162,11 @@ namespace ValidationXAMLForm
         private void RightButton_Click(object sender, RoutedEventArgs e)
         {
             CurentIndex++;
+        }
+
+        private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            NameCheck();
         }
     }
 }
