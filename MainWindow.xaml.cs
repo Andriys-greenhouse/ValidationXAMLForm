@@ -30,7 +30,15 @@ namespace ValidationXAMLForm
             set
             {
                 _CurentIndex = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentIndex"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HeadlineText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentName"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentLastName"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentBirthYear"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentJob"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentWage"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentEducationIndex"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RightButtonVisibility"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LeftButtonVisibility"));
             }
         }
 
@@ -43,12 +51,16 @@ namespace ValidationXAMLForm
             employeeList.Add(new Employee("Martin", "Pálava", "1958", "Maturitní zkouška", "Výkonný ředitel", "75000"));
             employeeList.Add(new Employee());
 
- 
+            DataContext = this;
+            /*
             NameBox.DataContext = employeeList[CurentIndex];
             LastNameBox.DataContext = employeeList[CurentIndex];
             BirthYearBox.DataContext = employeeList[CurentIndex];
             JobBox.DataContext = employeeList[CurentIndex];
             WageBox.DataContext = employeeList[CurentIndex];
+            */
+
+            CurentIndex = 0;
         }
 
         public string HeadlineText
@@ -60,6 +72,37 @@ namespace ValidationXAMLForm
             }
         }
 
+        public string CurentName 
+        { 
+            get { return employeeList[CurentIndex].Name; } 
+            set { employeeList[CurentIndex].Name = value; } 
+        }
+        public string CurentLastName 
+        { 
+            get { return employeeList[CurentIndex].LastName; }
+            set { employeeList[CurentIndex].LastName = value; }
+        }
+        public string CurentBirthYear 
+        { 
+            get { return employeeList[CurentIndex].BirthYear; }
+            set { employeeList[CurentIndex].BirthYear = value; }
+        }
+        public string CurentJob 
+        { 
+            get { return employeeList[CurentIndex].Job; }
+            set { employeeList[CurentIndex].Job = value; }
+        }
+        public string CurentWage 
+        { 
+            get { return employeeList[CurentIndex].Wage; }
+            set { employeeList[CurentIndex].Wage = value; }
+        }
+        public int CurentEducationIndex 
+        { 
+            get { return employeeList[CurentIndex].EducationIndex; }
+            set { employeeList[CurentIndex].EducationIndex = value; }
+        }
+
         public int nameErrHeight = 2;
         public string nameErrText = "";
         public Visibility nameErrVis = Visibility.Hidden;
@@ -68,7 +111,7 @@ namespace ValidationXAMLForm
             if (true) { return true; } 
         }
 
-        public static Visibility LeftButtonVisibility
+        public Visibility LeftButtonVisibility
         {
             get
             {
@@ -77,7 +120,7 @@ namespace ValidationXAMLForm
             }
         }
 
-        public static Visibility RightButtonVisibility
+        public Visibility RightButtonVisibility
         {
             get
             {

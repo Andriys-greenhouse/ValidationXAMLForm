@@ -7,14 +7,44 @@ namespace ValidationXAMLForm
     {
         public static List<Employee> Existing = new List<Employee>();
 
-        string _Education;
+        public int EducationIndex { get; set; }
         public string Education
         {
-            get { return _Education; }
+            get 
+            {
+                switch (EducationIndex)
+                {
+                    case 0:
+                        return "Základní vzdělání";
+                    case 1:
+                        return "Výuční list";
+                    case 2:
+                        return "Maturitní zkouška";
+                    case 3:
+                        return "Vyšší vzdělání";
+                    default:
+                        return "Invalid education index!";
+                }
+            }
             set
             {
-                if (value.Length > 1) { _Education = value; }
-                else { throw new ArgumentException("Employee's education must have at least two letters!"); }
+                switch (value)
+                {
+                    case "Základní vzdělání":
+                        EducationIndex = 0;
+                        break;
+                    case "Výuční list":
+                        EducationIndex = 1;
+                        break;
+                    case "Maturitní zkouška":
+                        EducationIndex = 2;
+                        break;
+                    case "Vyšší vzdělání":
+                        EducationIndex = 3;
+                        break;
+                    default:
+                        throw new ArgumentException("Invalid Education string entered");
+                }
             }
         }
 
@@ -52,7 +82,7 @@ namespace ValidationXAMLForm
         {
             _Job = "";
             _Wage = "";
-            _Education = "";
+            EducationIndex = 4;
             Existing.Add(this);
         }
     }

@@ -62,19 +62,19 @@
         <TextBlock x:Name="WageErrBlock" Grid.Column="4" Grid.Row="12" VerticalAlignment="Center" 
                    Height="2" Foreground="Red"/>
 
-        <TextBox x:Name="NameBox" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox x:Name="NameBox" Text="{Binding CurentName,UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="3" Grid.Row="2" Width="200" Margin="5" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="LastNameBox" Text="{Binding LastName,UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox x:Name="LastNameBox" Text="{Binding CurentLastName,UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="3" Grid.Row="4" Width="200" Margin="5" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="BirthYearBox" Text="{Binding BirthYear,UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox x:Name="BirthYearBox" Text="{Binding CurentBirthYear,UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="3" Grid.Row="6" Width="200" Margin="5" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="JobBox" Text="{Binding Job,UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox x:Name="JobBox" Text="{Binding CurentJob,UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="3" Grid.Row="9" Width="200" Margin="5" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="WageBox" Text="{Binding Wage,UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox x:Name="WageBox" Text="{Binding CurentWage,UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="3" Grid.Row="11" Width="200" Margin="5"  Grid.ColumnSpan="2"/>
 
         <ComboBox x:Name="EducationComboBox" Grid.Column="4" Grid.Row="8" Width="200" Margin="5" 
-                  SelectedValuePath="Content" SelectedItem="{Binding Education,UpdateSourceTrigger=PropertyChanged}">
+                  SelectedValuePath="Content" SelectedIndex="{Binding CurentEducationIndex,UpdateSourceTrigger=PropertyChanged}">
             <ComboBoxItem Content="Základní vzdělání"/>
             <ComboBoxItem Content="Výuční list"/>
             <ComboBoxItem Content="Maturitní zkouška"/>
