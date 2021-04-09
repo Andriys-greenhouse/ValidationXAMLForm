@@ -40,6 +40,8 @@ namespace ValidationXAMLForm
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentEducationIndex"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RightButtonVisibility"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LeftButtonVisibility"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ListButtonVisibility"));
+
             }
         }
 
@@ -101,6 +103,7 @@ namespace ValidationXAMLForm
         }
 
 
+
         public int NameErrHeight { get; set; }
         public string NameErrText { get; set; }
         public Visibility NameErrVis { get; set; }
@@ -141,6 +144,9 @@ namespace ValidationXAMLForm
         private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             NameCheckOK();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RightButtonVisibility"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LeftButtonVisibility"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddButtonVisibility"));
         }
 
 
@@ -184,6 +190,9 @@ namespace ValidationXAMLForm
         private void LastNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             LastNameCheckOK();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RightButtonVisibility"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LeftButtonVisibility"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddButtonVisibility"));
         }
 
 
@@ -227,8 +236,81 @@ namespace ValidationXAMLForm
         private void JobBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             JobCheckOK();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RightButtonVisibility"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LeftButtonVisibility"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddButtonVisibility"));
         }
 
+
+
+        public int BirthYearErrHeight { get; set; }
+        public string BirthYearErrText { get; set; }
+        public Visibility BirthYearErrVis { get; set; }
+        public bool BirthYearCheckOK()
+        {
+            if (!int.TryParse(BirthYearBox.Text, out int notNeeded))
+            {
+                BirthYearErrHeight = 20;
+                BirthYearErrText = "Rok narození musí být celé číslo.";
+                BirthYearErrVis = Visibility.Visible;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BirthYearErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BirthYearErrText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BirthYearErrVis"));
+                return false;
+            }
+
+            else
+            {
+                BirthYearErrHeight = 2;
+                BirthYearErrVis = Visibility.Hidden;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BirthYearErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BirthYearErrVis"));
+                return true;
+            }
+        }
+
+        private void BirthYearBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BirthYearCheckOK();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RightButtonVisibility"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LeftButtonVisibility"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddButtonVisibility"));
+        }
+
+
+        public int WageErrHeight { get; set; }
+        public string WageErrText { get; set; }
+        public Visibility WageErrVis { get; set; }
+        public bool WageCheckOK()
+        {
+            if (!int.TryParse(WageBox.Text, out int EmployeesWage) || EmployeesWage < 0)
+            {
+                WageErrHeight = 20;
+                WageErrText = "Plat musí být celé a kladné číslo.";
+                WageErrVis = Visibility.Visible;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WageErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WageErrText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WageErrVis"));
+                return false;
+            }
+
+            else
+            {
+                WageErrHeight = 2;
+                WageErrVis = Visibility.Hidden;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WageErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WageErrVis"));
+                return true;
+            }
+        }
+
+        private void WageBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            WageCheckOK();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RightButtonVisibility"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LeftButtonVisibility"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddButtonVisibility"));
+        }
 
 
 
@@ -237,7 +319,8 @@ namespace ValidationXAMLForm
         {
             get
             {
-                if (_CurentIndex == 0 || _CurentIndex == employeeList.Count - 1) { return Visibility.Hidden; }
+                if (_CurentIndex == 0 || _CurentIndex == employeeList.Count - 1 || !CompletCheckOk()) 
+                { return Visibility.Hidden; }
                 else { return Visibility.Visible; }
             }
         }
@@ -246,7 +329,25 @@ namespace ValidationXAMLForm
         {
             get
             {
-                if (_CurentIndex < employeeList.Count - 2) { return Visibility.Visible; }
+                if (_CurentIndex < employeeList.Count - 2 && CompletCheckOk()) { return Visibility.Visible; }
+                else { return Visibility.Hidden; }
+            }
+        }
+
+        public Visibility ListButtonVisibility
+        {
+            get
+            {
+                if (_CurentIndex == employeeList.Count - 1) { return Visibility.Visible; }
+                else { return Visibility.Hidden; }
+            }
+        }
+
+        public Visibility AddButtonVisibility
+        {
+            get
+            {
+                if (CompletCheckOk()) { return Visibility.Visible; }
                 else { return Visibility.Hidden; }
             }
         }
@@ -261,5 +362,28 @@ namespace ValidationXAMLForm
             CurentIndex++;
         }
 
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurentIndex != employeeList.Count - 1) 
+            { 
+                CurentIndex = employeeList.Count - 1; 
+            }
+            else if (CompletCheckOk())
+            {
+                employeeList.Add(new Employee());
+                CurentIndex = employeeList.Count - 2;
+            }
+            else { MessageBox.Show("Nesprávná hodnota polí."); }
+        }
+
+        private void ListButton_Click(object sender, RoutedEventArgs e)
+        {
+            CurentIndex = 0;
+            employeeList.Add(new Employee());
+            employeeList.RemoveAt(employeeList.Count - 2);
+        }
+
+        public bool CompletCheckOk() 
+        { return NameCheckOK() && LastNameCheckOK() && BirthYearCheckOK() && JobCheckOK() && WageCheckOK(); }
     }
 }

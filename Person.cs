@@ -6,16 +6,7 @@ namespace ValidationXAMLForm
     {
         public string Name { get; set; }
         public string LastName { get; set; }
-        string _BirthYear;
-        public string BirthYear
-        {
-            get { return _BirthYear; }
-            set
-            {
-                if (int.TryParse(value, out int notNeeded)) { _BirthYear = value; }
-                else { throw new ArgumentException("Person's birth date must be a number!"); }
-            }
-        }
+        public string BirthYear { get; set; }
 
         public Person(string aName, string aLastName, string aBirthDate)
         {
@@ -28,7 +19,7 @@ namespace ValidationXAMLForm
         {
             Name = "";
             LastName = "";
-            _BirthYear = "";
+            BirthYear = "";
         }
     }
 }

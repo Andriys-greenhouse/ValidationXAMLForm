@@ -56,7 +56,10 @@
         <TextBlock Grid.Column="2" Grid.Row="6" Text="Rok narození" HorizontalAlignment="Right" 
                    VerticalAlignment="Center"/>
         <TextBlock x:Name="BirthYearErrBlock" Grid.Column="4" Grid.Row="7" VerticalAlignment="Center" 
-                   Height="2" Foreground="Red"/>
+                   Height="{Binding BirthYearErrHeight,UpdateSourceTrigger=PropertyChanged}" 
+                   Text="{Binding BirthYearErrText,UpdateSourceTrigger=PropertyChanged}"
+                   Visibility="{Binding BirthYearErrVis, UpdateSourceTrigger=PropertyChanged}" 
+                   FontSize="15" Foreground="Red"/>
         <TextBlock Grid.Column="2" Grid.Row="8" Grid.ColumnSpan="2" Text="Dokončené vzdělání" 
                    VerticalAlignment="Center"/>
         <TextBlock Grid.Column="2" Grid.Row="9" Text="Pracovní pozice" HorizontalAlignment="Right" 
@@ -69,7 +72,10 @@
         <TextBlock Grid.Column="2" Grid.Row="11" Text="Hrubý plat" HorizontalAlignment="Right" 
                    VerticalAlignment="Center"/>
         <TextBlock x:Name="WageErrBlock" Grid.Column="4" Grid.Row="12" VerticalAlignment="Center" 
-                   Height="2" Foreground="Red"/>
+                   Height="{Binding WageErrHeight,UpdateSourceTrigger=PropertyChanged}" 
+                   Text="{Binding WageErrText,UpdateSourceTrigger=PropertyChanged}" 
+                   Visibility="{Binding WageErrVis, UpdateSourceTrigger=PropertyChanged}" 
+                   FontSize="15" Foreground="Red"/>
 
         <TextBox x:Name="NameBox" Text="{Binding CurentName,UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="3" Grid.Row="2" Width="200" Margin="5" Grid.ColumnSpan="2"
@@ -78,15 +84,18 @@
                  Grid.Column="3" Grid.Row="4" Width="200" Margin="5" Grid.ColumnSpan="2"
                  TextChanged="LastNameBox_TextChanged"/>
         <TextBox x:Name="BirthYearBox" Text="{Binding CurentBirthYear,UpdateSourceTrigger=PropertyChanged}" 
-                 Grid.Column="3" Grid.Row="6" Width="200" Margin="5" Grid.ColumnSpan="2"/>
+                 Grid.Column="3" Grid.Row="6" Width="200" Margin="5" Grid.ColumnSpan="2"
+                 TextChanged="BirthYearBox_TextChanged"/>
         <TextBox x:Name="JobBox" Text="{Binding CurentJob,UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="3" Grid.Row="9" Width="200" Margin="5" Grid.ColumnSpan="2"
                  TextChanged="JobBox_TextChanged"/>
         <TextBox x:Name="WageBox" Text="{Binding CurentWage,UpdateSourceTrigger=PropertyChanged}" 
-                 Grid.Column="3" Grid.Row="11" Width="200" Margin="5"  Grid.ColumnSpan="2"/>
+                 Grid.Column="3" Grid.Row="11" Width="200" Margin="5"  Grid.ColumnSpan="2"
+                 TextChanged="WageBox_TextChanged"/>
 
         <ComboBox x:Name="EducationComboBox" Grid.Column="4" Grid.Row="8" Width="200" Margin="5" 
                   SelectedValuePath="Content" SelectedIndex="{Binding CurentEducationIndex,UpdateSourceTrigger=PropertyChanged}">
+            <ComboBoxItem Content="Žádné vzdělání"/>
             <ComboBoxItem Content="Základní vzdělání"/>
             <ComboBoxItem Content="Výuční list"/>
             <ComboBoxItem Content="Maturitní zkouška"/>
@@ -94,9 +103,11 @@
         </ComboBox>
 
         <Button x:Name="AddButton" Grid.Column="2" Grid.Row="13" Content="Přidat" Margin="10" 
-                MaxWidth="150" Grid.ColumnSpan="2" MinWidth="100"/>
-        <Button x:Name="ListButton" Grid.Column="4" Grid.Row="13" Content="Existující" Margin="10" 
-                MaxWidth="150" MinWidth="100" Visibility="Hidden"/>
+                MaxWidth="150" Grid.ColumnSpan="2" MinWidth="100" Click="AddButton_Click"
+                Visibility="{Binding AddButtonVisibility,UpdateSourceTrigger=PropertyChanged}"/>
+        <Button x:Name="ListButton" Grid.Column="4" Grid.Row="13" Content="Zrušit" Margin="10" 
+                MaxWidth="150" MinWidth="100" Click="ListButton_Click"
+                Visibility="{Binding ListButtonVisibility,UpdateSourceTrigger=PropertyChanged}"/>
         <Button x:Name="LeftButton" Grid.Column="1" Grid.Row="8" FontSize="25" HorizontalAlignment="Center" 
                 MinWidth="35" MinHeight="20" Content="&lt;" Margin="5" 
                 Visibility="{Binding LeftButtonVisibility,UpdateSourceTrigger=PropertyChanged}" Click="LeftButton_Click"/>

@@ -15,12 +15,14 @@ namespace ValidationXAMLForm
                 switch (EducationIndex)
                 {
                     case 0:
-                        return "Základní vzdělání";
+                        return "Žádné vzdělání";
                     case 1:
-                        return "Výuční list";
+                        return "Základní vzdělání";
                     case 2:
-                        return "Maturitní zkouška";
+                        return "Výuční list";
                     case 3:
+                        return "Maturitní zkouška";
+                    case 4:
                         return "Vyšší vzdělání";
                     default:
                         return "Invalid education index!";
@@ -30,17 +32,20 @@ namespace ValidationXAMLForm
             {
                 switch (value)
                 {
-                    case "Základní vzdělání":
+                    case "Žádné vzdělání":
                         EducationIndex = 0;
                         break;
-                    case "Výuční list":
+                    case "Základní vzdělání":
                         EducationIndex = 1;
                         break;
-                    case "Maturitní zkouška":
+                    case "Výuční list":
                         EducationIndex = 2;
                         break;
-                    case "Vyšší vzdělání":
+                    case "Maturitní zkouška":
                         EducationIndex = 3;
+                        break;
+                    case "Vyšší vzdělání":
+                        EducationIndex = 4;
                         break;
                     default:
                         throw new ArgumentException("Invalid Education string entered");
@@ -50,16 +55,7 @@ namespace ValidationXAMLForm
 
         public string Job { get; set; }
 
-        string _Wage;
-        public string Wage
-        {
-            get { return _Wage; }
-            set
-            {
-                if (int.TryParse(value, out int notNeeded)) { _Wage = value; }
-                else { throw new ArgumentException("Employee's pay must be a number!"); }
-            }
-        }
+        public string Wage { get; set; }
 
         public Employee(string aName, string aLastName, string aBirthDate, string aEducation, string aJob, string aWage):base(aName, aLastName, aBirthDate)
         {
@@ -72,8 +68,8 @@ namespace ValidationXAMLForm
         public Employee() : base()
         {
             Job = "";
-            _Wage = "";
-            EducationIndex = 4;
+            Wage = "";
+            EducationIndex = 0;
             Existing.Add(this);
         }
     }
