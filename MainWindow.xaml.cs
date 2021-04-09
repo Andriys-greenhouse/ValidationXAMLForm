@@ -102,7 +102,8 @@ namespace ValidationXAMLForm
             set { employeeList[CurentIndex].EducationIndex = value; }
         }
 
-
+        public int ColapsedHeight = 2;
+        public int ActiveHeight = 20;
 
         public int NameErrHeight { get; set; }
         public string NameErrText { get; set; }
@@ -111,7 +112,7 @@ namespace ValidationXAMLForm
         {
             if (NameBox.Text.Length < 2) 
             { 
-                NameErrHeight = 20;
+                NameErrHeight = ActiveHeight;
                 NameErrText = "Jméno musí mít minimálně dvě písmena.";
                 NameErrVis = Visibility.Visible;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrHeight"));
@@ -122,7 +123,7 @@ namespace ValidationXAMLForm
             
             else if (NameBox.Text.Length > 20)
             {
-                NameErrHeight = 20;
+                NameErrHeight = ActiveHeight;
                 NameErrText = "Jméno musí mít maximálně dvacet písmen.";
                 NameErrVis = Visibility.Visible;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrHeight"));
@@ -133,7 +134,7 @@ namespace ValidationXAMLForm
 
             else
             {
-                NameErrHeight = 2;
+                NameErrHeight = ColapsedHeight;
                 NameErrVis = Visibility.Hidden;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrHeight"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrVis"));
@@ -157,7 +158,7 @@ namespace ValidationXAMLForm
         {
             if (LastNameBox.Text.Length < 2)
             {
-                LastNameErrHeight = 20;
+                LastNameErrHeight = ActiveHeight;
                 LastNameErrText = "Přijmení musí mít minimálně dvě písmena.";
                 LastNameErrVis = Visibility.Visible;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrHeight"));
@@ -168,7 +169,7 @@ namespace ValidationXAMLForm
 
             else if (LastNameBox.Text.Length > 20)
             {
-                LastNameErrHeight = 20;
+                LastNameErrHeight = ActiveHeight;
                 LastNameErrText = "Přijmení musí mít maximálně dvacet písmen.";
                 LastNameErrVis = Visibility.Visible;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrHeight"));
@@ -179,7 +180,7 @@ namespace ValidationXAMLForm
 
             else
             {
-                LastNameErrHeight = 2;
+                LastNameErrHeight = ColapsedHeight;
                 LastNameErrVis = Visibility.Hidden;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrHeight"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrVis"));
@@ -203,7 +204,7 @@ namespace ValidationXAMLForm
         {
             if (JobBox.Text.Length < 2)
             {
-                JobErrHeight = 20;
+                JobErrHeight = ActiveHeight;
                 JobErrText = "Pracovní pozice musí mít minimálně dvě písmena.";
                 JobErrVis = Visibility.Visible;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrHeight"));
@@ -214,7 +215,7 @@ namespace ValidationXAMLForm
 
             else if (JobBox.Text.Length > 20)
             {
-                JobErrHeight = 20;
+                JobErrHeight = ActiveHeight;
                 JobErrText = "Pracovní pozice musí mít maximálně dvacet písmen.";
                 JobErrVis = Visibility.Visible;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrHeight"));
@@ -225,7 +226,7 @@ namespace ValidationXAMLForm
 
             else
             {
-                JobErrHeight = 2;
+                JobErrHeight = ColapsedHeight;
                 JobErrVis = Visibility.Hidden;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrHeight"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrVis"));
@@ -250,7 +251,7 @@ namespace ValidationXAMLForm
         {
             if (!int.TryParse(BirthYearBox.Text, out int notNeeded))
             {
-                BirthYearErrHeight = 20;
+                BirthYearErrHeight = ActiveHeight;
                 BirthYearErrText = "Rok narození musí být celé číslo.";
                 BirthYearErrVis = Visibility.Visible;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BirthYearErrHeight"));
@@ -261,7 +262,7 @@ namespace ValidationXAMLForm
 
             else
             {
-                BirthYearErrHeight = 2;
+                BirthYearErrHeight = ColapsedHeight;
                 BirthYearErrVis = Visibility.Hidden;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BirthYearErrHeight"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BirthYearErrVis"));
@@ -285,7 +286,7 @@ namespace ValidationXAMLForm
         {
             if (!int.TryParse(WageBox.Text, out int EmployeesWage) || EmployeesWage < 0)
             {
-                WageErrHeight = 20;
+                WageErrHeight = ActiveHeight;
                 WageErrText = "Plat musí být celé a kladné číslo.";
                 WageErrVis = Visibility.Visible;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WageErrHeight"));
@@ -296,7 +297,7 @@ namespace ValidationXAMLForm
 
             else
             {
-                WageErrHeight = 2;
+                WageErrHeight = ColapsedHeight;
                 WageErrVis = Visibility.Hidden;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WageErrHeight"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WageErrVis"));
