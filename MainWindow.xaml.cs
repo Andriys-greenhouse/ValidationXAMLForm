@@ -23,6 +23,7 @@ namespace ValidationXAMLForm
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+
         static int _CurentIndex;
         public int CurentIndex
         {
@@ -39,9 +40,9 @@ namespace ValidationXAMLForm
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurentEducationIndex"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RightButtonVisibility"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LeftButtonVisibility"));
-                NameCheck();
             }
         }
+
 
         public static List<Employee> employeeList = new List<Employee>();
         public MainWindow()
@@ -56,6 +57,8 @@ namespace ValidationXAMLForm
 
             CurentIndex = 0;
         }
+
+
 
         public string HeadlineText
         {
@@ -98,42 +101,136 @@ namespace ValidationXAMLForm
         }
 
 
-        public int nameErrHeight { get; set; }
-        public string nameErrText { get; set; }
-        public Visibility nameErrVis { get; set; }
-        public static bool NameCheck()
+        public int NameErrHeight { get; set; }
+        public string NameErrText { get; set; }
+        public Visibility NameErrVis { get; set; }
+        public bool NameCheckOK()
         {
-            if (NameBox.Text.Length < 1) 
+            if (NameBox.Text.Length < 2) 
             { 
-                nameErrHeight = 10;
-                nameErrText = "Name must be at least two characters long."
-                nameErrVis = Visibility.Visible;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrHeight"));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrText"));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrVis"));
+                NameErrHeight = 20;
+                NameErrText = "Jméno musí mít minimálně dvě písmena.";
+                NameErrVis = Visibility.Visible;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrVis"));
                 return false;
             }
             
             else if (NameBox.Text.Length > 20)
             {
-                nameErrHeight = 10;
-                nameErrText = "Name must be at most twenty characters long."
-                nameErrVis = Visibility.Visible;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrHeight"));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrText"));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrVis"));
+                NameErrHeight = 20;
+                NameErrText = "Jméno musí mít maximálně dvacet písmen.";
+                NameErrVis = Visibility.Visible;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrVis"));
                 return false;
             }
 
             else
             {
-                nameErrHeight = 2;
-                nameErrVis = Visibility.Hidden;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrHeight"));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("nameErrVis"));
+                NameErrHeight = 2;
+                NameErrVis = Visibility.Hidden;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameErrVis"));
                 return true;
             }
         }
+
+        private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            NameCheckOK();
+        }
+
+
+        public int LastNameErrHeight { get; set; }
+        public string LastNameErrText { get; set; }
+        public Visibility LastNameErrVis { get; set; }
+        public bool LastNameCheckOK()
+        {
+            if (LastNameBox.Text.Length < 2)
+            {
+                LastNameErrHeight = 20;
+                LastNameErrText = "Přijmení musí mít minimálně dvě písmena.";
+                LastNameErrVis = Visibility.Visible;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrVis"));
+                return false;
+            }
+
+            else if (LastNameBox.Text.Length > 20)
+            {
+                LastNameErrHeight = 20;
+                LastNameErrText = "Přijmení musí mít maximálně dvacet písmen.";
+                LastNameErrVis = Visibility.Visible;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrVis"));
+                return false;
+            }
+
+            else
+            {
+                LastNameErrHeight = 2;
+                LastNameErrVis = Visibility.Hidden;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastNameErrVis"));
+                return true;
+            }
+        }
+
+        private void LastNameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LastNameCheckOK();
+        }
+
+
+        public int JobErrHeight { get; set; }
+        public string JobErrText { get; set; }
+        public Visibility JobErrVis { get; set; }
+        public bool JobCheckOK()
+        {
+            if (JobBox.Text.Length < 2)
+            {
+                JobErrHeight = 20;
+                JobErrText = "Pracovní pozice musí mít minimálně dvě písmena.";
+                JobErrVis = Visibility.Visible;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrVis"));
+                return false;
+            }
+
+            else if (JobBox.Text.Length > 20)
+            {
+                JobErrHeight = 20;
+                JobErrText = "Pracovní pozice musí mít maximálně dvacet písmen.";
+                JobErrVis = Visibility.Visible;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrText"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrVis"));
+                return false;
+            }
+
+            else
+            {
+                JobErrHeight = 2;
+                JobErrVis = Visibility.Hidden;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrHeight"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("JobErrVis"));
+                return true;
+            }
+        }
+
+        private void JobBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            JobCheckOK();
+        }
+
+
+
 
 
         public Visibility LeftButtonVisibility
@@ -164,9 +261,5 @@ namespace ValidationXAMLForm
             CurentIndex++;
         }
 
-        private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            NameCheck();
-        }
     }
 }

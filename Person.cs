@@ -5,16 +5,7 @@ namespace ValidationXAMLForm
     public class Person
     {
         public string Name { get; set; }
-        string _LastName;
-        public string LastName
-        {
-            get { return _LastName; }
-            set
-            {
-                if (value.Length > 1) { _LastName = value; }
-                else { throw new ArgumentException("Person's last name must have at least two letters!"); }
-            }
-        }
+        public string LastName { get; set; }
         string _BirthYear;
         public string BirthYear
         {
@@ -35,8 +26,8 @@ namespace ValidationXAMLForm
 
         public Person()
         {
-            _Name = "";
-            _LastName = "";
+            Name = "";
+            LastName = "";
             _BirthYear = "";
         }
     }

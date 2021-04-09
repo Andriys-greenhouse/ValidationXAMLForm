@@ -8,7 +8,7 @@ namespace ValidationXAMLForm
         public static List<Employee> Existing = new List<Employee>();
 
         public int EducationIndex { get; set; }
-        public string Education
+        public string Education //this could be probably done easyer with enum
         {
             get 
             {
@@ -48,16 +48,7 @@ namespace ValidationXAMLForm
             }
         }
 
-        string _Job;
-        public string Job
-        {
-            get { return _Job; }
-            set
-            {
-                if (value.Length > 1) { _Job = value; }
-                else { throw new ArgumentException("Employee's job must have at least two letters!"); }
-            }
-        }
+        public string Job { get; set; }
 
         string _Wage;
         public string Wage
@@ -80,7 +71,7 @@ namespace ValidationXAMLForm
 
         public Employee() : base()
         {
-            _Job = "";
+            Job = "";
             _Wage = "";
             EducationIndex = 4;
             Existing.Add(this);
